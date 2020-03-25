@@ -26,10 +26,10 @@ if ( sizeof($request_array['events']) > 0 )
 			$cumulative = 955;
 			$death = 4;
 			$fine = 50;
-			$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"<br>';
-			$reply_message .= 'ผู้ป่วยสะสม	จำนวน '.$cumulative.' ราย<br>';
-			$reply_message .= 'ผู้เสียชีวิต	จำนวน '.$death.' ราย<br>';
-			$reply_message .= 'รักษาหาย	จำนวน '.$fine.' ราย<br>';
+			$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย" \n';
+			$reply_message .= 'ผู้ป่วยสะสม	จำนวน '.$cumulative.' ราย \n';
+			$reply_message .= 'ผู้เสียชีวิต	จำนวน '.$death.' ราย \n';
+			$reply_message .= 'รักษาหาย	จำนวน '.$fine.' ราย \n';
 			$reply_message .= 'ผู้รายงานข้อมูล: 59160180 นายธนภร เกลี้ยกล่อม';
 		}
 		else if(($text== "ข้อมูลส่วนตัวของผู้พัฒนาระบบ")||($text== "ข้อมูลส่วนตัว")||($text== "ข้อมูลผู้พัฒนา")||($text== "ข้อมูลผู้พัฒนาระบบ")){
