@@ -27,10 +27,25 @@ if( $event['message']['type'] == 'text' )
 	$text = $event['message']['text'];
 
 	if(($text == "อยากทราบยอด COVID-19 ครับ")||($text == "ยอด COVID-19")||($text == "อยากทราบยอด COVID-19 ครับ"||($text == "COVID-19")||($text == "โควิด"))){
-		$cumulative = 955;
-		$death = 4;
-		$fine = 50;
-		$reply_message = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
+		$data = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
+		if(strpos($data, "cURL Error #") === TRUE){
+		  echo $data;
+		  return;
+		}
+		$covidData = json_decode($data)->response[0];
+		var_dump($covidData);
+		$datetime = new DateTime($covidData->time);
+		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
+		ติดเชื้อเพิ่ม	จำนวน '.str_replace('+', '', $covidData->cases->new).' ราย
+		ติดเชื้อสะสม	จำนวน '.$covidData->cases->total.' ราย
+		'.($covidData->deaths->new === NULL ? '' : 'เสียชีวิต	จำนวน '.$covidData->deaths->new.' ราย').'
+		ยอดรวมผู้เสียชีวิต	จำนวน '.$covidData->deaths->total.' ราย
+		รักษาหาย	จำนวน '.$covidData->cases->recovered.' ราย
+		กำลังรักษา	จำนวน '.$covidData->cases->active.' ราย
+		อาการวิกฤต	จำนวน '.$covidData->cases->critical.' ราย
+		ข้อมูล ณ วันที่ '.$datetime->format('d F Y').' เวลา '.$datetime->format('H:i').'น.';
+// 		echo $reply_message;
+// 		$reply_message = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
 //  		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 // ผู้ป่วยสะสม	จำนวน '.$cumulative.' ราย
 // ผู้เสียชีวิต	จำนวน '.$death.' ราย
