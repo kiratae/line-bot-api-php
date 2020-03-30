@@ -42,6 +42,7 @@ if( $event['message']['type'] == 'text' )
 		}
 		$covidData = json_decode($data)->response[0];
 		$datetime = new DateTime($covidData->time);
+		date_timezone_set($datetime, timezone_open('Asia/Bangkok'));
 $reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 🤧 ติดเชื้อเพิ่ม '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
 😷 ติดเชื้อสะสม '.number_format($covidData->cases->total).' ราย'.($covidData->deaths->new === NULL ? '' : '
