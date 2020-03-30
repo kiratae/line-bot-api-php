@@ -67,7 +67,6 @@ $reply_message = '"รายงานสถานการณ์ ยอดผู
 else
 // 	$reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
 }
-else
 // 	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
 
 	if( strlen($reply_message) > 0 )
