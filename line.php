@@ -24,9 +24,9 @@ if ( $event['type'] == 'message' )
 
 if( $event['message']['type'] == 'text' )
 {
-	$text = strtolower($event['message']['text']);
+	$text = $event['message']['text'];
 
-	if(($text == "อยากทราบยอด covid-19 ครับ")||(strpos($text, "ยอด covid-19") === TRUE)||(strpos($text, "ยอด covid") === TRUE)||(strpos($text, "ยอดโควิด") === TRUE)||($text == "อยากทราบยอด covid-19 ครับ"||($text == "covid-19")||($text == "โควิด"))){
+	if((strtolower($text) == "อยากทราบยอด covid-19 ครับ")||(strpos(strtolower($text), "ยอด covid-19") === TRUE)||(strpos(strtolower($text), "ยอด covid") === TRUE)||(strpos($text, "ยอดโควิด") === TRUE)){
 		$data = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
 		if(strpos($data, "cURL Error #") === TRUE){
 		  echo $data;
