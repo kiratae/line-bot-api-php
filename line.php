@@ -39,21 +39,16 @@ if( $event['message']['type'] == 'text' )
 		}
 		$covidData = json_decode($data)->response[0];
 		$datetime = new DateTime($covidData->time);
-		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
-ติดเชื้อเพิ่ม	จำนวน '.str_replace('+', '', $covidData->cases->new).' ราย
-ติดเชื้อสะสม	จำนวน '.$covidData->cases->total.' ราย'.($covidData->deaths->new === NULL ? '' : 'เสียชีวิต	จำนวน '.$covidData->deaths->new.' ราย
-').'ยอดรวมผู้เสียชีวิต	จำนวน '.$covidData->deaths->total.' ราย
-รักษาหาย	จำนวน '.$covidData->cases->recovered.' ราย
-กำลังรักษา	จำนวน '.$covidData->cases->active.' ราย
-อาการวิกฤต	จำนวน '.$covidData->cases->critical.' ราย
-ข้อมูล ณ วันที่ '.$datetime->format('d F Y').' เวลา '.$datetime->format('H:i').'น.';
-// 		echo $reply_message;
-// 		$reply_message = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
-//  		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
-// ผู้ป่วยสะสม	จำนวน '.$cumulative.' ราย
-// ผู้เสียชีวิต	จำนวน '.$death.' ราย
-// รักษาหาย	จำนวน '.$fine.' ราย
-// ผู้รายงานข้อมูล: 59160180 นายธนภร เกลี้ยกล่อม';
+$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
+ติดเชื้อเพิ่ม	จำนวน '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
+ติดเชื้อสะสม	จำนวน '.number_format($covidData->cases->total).' ราย
+'.($covidData->deaths->new === NULL ? '' : 'เสียชีวิต	จำนวน '.number_format($covidData->deaths->new).' ราย').'
+ยอดรวมผู้เสียชีวิต	จำนวน '.number_format($covidData->deaths->total).' ราย
+รักษาหาย	จำนวน '.number_format($covidData->cases->recovered).' ราย
+กำลังรักษา	จำนวน '.number_format($covidData->cases->active).' ราย
+อาการวิกฤต	จำนวน '.number_format($covidData->cases->critical).' ราย
+ข้อมูล ณ วันที่ '.formatDate($datetime).' เวลา '.$datetime->format('H:i').'น.
+reference: rapidapi.com';
 	}
 	else if(($text== "ข้อมูลส่วนตัวของผู้พัฒนาระบบ")||($text== "ข้อมูลส่วนตัว")||($text== "ข้อมูลผู้พัฒนา")||($text== "ข้อมูลผู้พัฒนาระบบ")){
 		$reply_message = 'ชื่อนายธนภร เกลี้ยกล่อม อายุ 22ปี น้ำหนัก 68kg. สูง 170cm. ขนาดรองเท้าเบอร์ 8 ใช้หน่วย US';
@@ -132,4 +127,13 @@ function getCovidData($url, $host, $token){
 		return $response;
 	}
 }
+
+function formatDate($date){
+  $monthTH = [null,'มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  $thai_date_return = $date->format("j");   
+  $thai_date_return.=" ".$monthTH[$date->format("n")];   
+  $thai_date_return.= " ".($date->format("Y")+543);   
+  return $thai_date_return;  
+}
+
 ?>
