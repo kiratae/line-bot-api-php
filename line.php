@@ -30,7 +30,7 @@ if( $event['message']['type'] == 'text' )
 		$cumulative = 955;
 		$death = 4;
 		$fine = 50;
-		$reply_message = getCovidData($COVID_APT_URL, $COVID_ACCESS_TOKEN);
+		$reply_message = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
 //  		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 // ผู้ป่วยสะสม	จำนวน '.$cumulative.' ราย
 // ผู้เสียชีวิต	จำนวน '.$death.' ราย
