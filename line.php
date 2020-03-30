@@ -59,16 +59,16 @@ $reply_message = '"รายงานสถานการณ์ ยอดผู
 	}
 	else
 	{
-		$reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
+// 		$reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
+		$reply_message = 'กรุณาพิมพ์ "รายงาน" เพื่อขอข้อมูลรายงาน';
 	}
 
 }
 else
-$reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
-
+// 	$reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
 }
 else
-	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
+// 	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
 
 	if( strlen($reply_message) > 0 )
 	{
