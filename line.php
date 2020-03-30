@@ -1,7 +1,7 @@
 <?php
 
 $API_URL = 'https://api.line.me/v2/bot/message/reply';
-$ACCESS_TOKEN = 'zfSRSw0HuumsRzK6EUbpbuauPkWmqlY/shvTWs40W16hfOf9qDSMr1et1rELso4OND+Ww4yQsSVNzxUUL38pWNFUnYfNO8u1ghUs1qECMJ8p75ClNzDod9jdixzZJYN47ZTMJBgtyZLfHp1295nWkQdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
+$ACCESS_TOKEN = '2o+T4Y0AV6kAJUeVVu6INETXt2jd3xeFVSVZPA4yuSTo7oJ1/b9lZbDzJFHidsLSLBaQpiu0YbB+HDyKkVPHIKmlXO1O1NtoJlMmxLIKZm7OU/sSi6g8NCeLYqL+6w3xiWKOrRneH6n2C7j7nZAqowdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN);
 
 $COVID_APT_URL = 'https://covid-193.p.rapidapi.com/statistics?country=Thailand';
