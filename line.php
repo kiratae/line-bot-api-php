@@ -41,8 +41,7 @@ if( $event['message']['type'] == 'text' )
 		$datetime = new DateTime($covidData->time);
 $reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 ติดเชื้อเพิ่ม	จำนวน '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
-ติดเชื้อสะสม	จำนวน '.number_format($covidData->cases->total).' ราย
-'.($covidData->deaths->new === NULL ? '' : 'เสียชีวิต	จำนวน '.number_format($covidData->deaths->new).' ราย').'
+ติดเชื้อสะสม	จำนวน '.number_format($covidData->cases->total).' ราย'.($covidData->deaths->new === NULL ? '' : 'เสียชีวิต	จำนวน '.number_format($covidData->deaths->new).' ราย').'
 ยอดรวมผู้เสียชีวิต	จำนวน '.number_format($covidData->deaths->total).' ราย
 รักษาหาย	จำนวน '.number_format($covidData->cases->recovered).' ราย
 กำลังรักษา	จำนวน '.number_format($covidData->cases->active).' ราย
