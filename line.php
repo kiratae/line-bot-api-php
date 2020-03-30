@@ -33,7 +33,6 @@ if( $event['message']['type'] == 'text' )
 		  return;
 		}
 		$covidData = json_decode($data)->response[0];
-		var_dump($covidData);
 		$datetime = new DateTime($covidData->time);
 		$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 		ติดเชื้อเพิ่ม	จำนวน '.str_replace('+', '', $covidData->cases->new).' ราย
