@@ -64,7 +64,7 @@ $reply_message = 'ระบบได้รับ '.ucfirst($event['message']['ty
 
 }
 else
-	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
+	//$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
 
 	if( strlen($reply_message) > 0 )
 	{
