@@ -11,39 +11,35 @@ $COVID_ACCESS_TOKEN = '26b94cb73dmshabed9734718d564p1c0051jsnca21f366ada3';
 $request = file_get_contents('php://input');   // Get request content
 $request_array = json_decode($request, true);   // Decode JSON to Array
 
-if ( sizeof($request_array['events']) > 0 )
-{
+if ( sizeof($request_array['events']) > 0 ) {
 
-foreach ($request_array['events'] as $event)
-{
-$reply_message = '';
-$reply_token = $event['replyToken'];
+    foreach ($request_array['events'] as $event) {
+        $reply_message = '';
+        $reply_token = $event['replyToken'];
 
-if ( $event['type'] == 'message' ) 
-{
+    if ( $event['type'] == 'message' ) {
 
-if( $event['message']['type'] == 'text' )
-{
-	$text = strtolower($event['message']['text']);
+        if( $event['message']['type'] == 'text' ) {
+            $text = strtolower($event['message']['text']);
 
-	if(($text == "อยากทราบยอด covid-19 ครับ")||
-   	(strpos($text, "รายงาน") !== FALSE)||
-	(strpos($text, "ยอด covid-19") !== FALSE)||
-	(strpos($text, "ยอด covid") !== FALSE)||
-	(strpos($text, "ยอดcovid") !== FALSE)||
-	(strpos($text, "covid") !== FALSE)||
-   	(strpos($text, "โคโรน่า") !== FALSE)||
-   	(strpos($text, "ไวรัส") !== FALSE)||
-	(strpos($text, "ยอดโควิด") !== FALSE)){
-		$data = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
-		if(strpos($data, "cURL Error #") === TRUE){
-		  echo $data;
-		  return;
-		}
-		$covidData = json_decode($data)->response[0];
-		$datetime = new DateTime($covidData->time);
-		date_timezone_set($datetime, timezone_open('Asia/Bangkok'));
-$reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
+            if(($text == "อยากทราบยอด covid-19 ครับ")||
+            (strpos($text, "รายงาน") !== FALSE)||
+            (strpos($text, "ยอด covid-19") !== FALSE)||
+            (strpos($text, "ยอด covid") !== FALSE)||
+            (strpos($text, "ยอดcovid") !== FALSE)||
+            (strpos($text, "covid") !== FALSE)||
+            (strpos($text, "โคโรน่า") !== FALSE)||
+            (strpos($text, "ไวรัส") !== FALSE)||
+            (strpos($text, "ยอดโควิด") !== FALSE)){
+                $data = getCovidData($COVID_APT_URL, $COVID_APT_HOST, $COVID_ACCESS_TOKEN);
+                if(strpos($data, "cURL Error #") === TRUE){
+                echo $data;
+                return;
+                }
+                $covidData = json_decode($data)->response[0];
+                $datetime = new DateTime($covidData->time);
+                date_timezone_set($datetime, timezone_open('Asia/Bangkok'));
+                $reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
 🤧 ติดเชื้อเพิ่ม '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
 😷 ติดเชื้อสะสม '.number_format($covidData->cases->total).' ราย'.($covidData->deaths->new === NULL ? '' : '
 👻 เสียชีวิต '.number_format($covidData->deaths->new).' ราย').'
@@ -53,35 +49,36 @@ $reply_message = '"รายงานสถานการณ์ ยอดผู
 😱 อาการวิกฤต '.number_format($covidData->cases->critical).' ราย
 ข้อมูล ณ วันที่ '.formatDate($datetime).'
 เวลา '.$datetime->format('H:i').' น.';
-	}
-	else if(($text== "ข้อมูลส่วนตัวของผู้พัฒนาระบบ")||($text== "ข้อมูลส่วนตัว")||($text== "ข้อมูลผู้พัฒนา")||($text== "ข้อมูลผู้พัฒนาระบบ")){
-		$reply_message = 'ชื่อนายธนภร เกลี้ยกล่อม อายุ 22ปี น้ำหนัก 68kg. สูง 170cm. ขนาดรองเท้าเบอร์ 8 ใช้หน่วย US';
-	}
-	else
-	{
-// 		$reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
-		$reply_message = 'กรุณาพิมพ์ "รายงาน" เพื่อขอข้อมูลรายงาน';
-	}
+            }
+            else if(($text== "ข้อมูลส่วนตัวของผู้พัฒนาระบบ")||($text== "ข้อมูลส่วนตัว")||($text== "ข้อมูลผู้พัฒนา")||($text== "ข้อมูลผู้พัฒนาระบบ")){
+                $reply_message = 'ชื่อนายธนภร เกลี้ยกล่อม อายุ 22ปี น้ำหนัก 68kg. สูง 170cm. ขนาดรองเท้าเบอร์ 8 ใช้หน่วย US';
+            }
+            else
+            {
+        // 		$reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
+                $reply_message = 'กรุณาพิมพ์ "รายงาน" เพื่อขอข้อมูลรายงาน';
+            }
 
-}
-else
-// 	$reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
-}
-// 	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
+        }
+    //else
+    // 	$reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
+    //}
+    // 	$reply_message = 'ระบบได้รับ Event '.ucfirst($event['type']).' ของคุณแล้ว';
 
-	if( strlen($reply_message) > 0 )
-	{
-		//$reply_message = iconv("tis-620","utf-8",$reply_message);
-		$data = [
-		'replyToken' => $reply_token,
-		'messages' => [['type' => 'text', 'text' => $reply_message]]
-		];
-		$post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+        if( strlen($reply_message) > 0 )
+        {
+            //$reply_message = iconv("tis-620","utf-8",$reply_message);
+            $data = [
+            'replyToken' => $reply_token,
+            'messages' => [['type' => 'text', 'text' => $reply_message]]
+            ];
+            $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
 
-		$send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
-		echo "Result: ".$send_result."\r\n";
-		}
-	}
+            $send_result = send_reply_message($API_URL, $POST_HEADER, $post_body);
+            echo "Result: ".$send_result."\r\n";
+            }
+        }
+    }
 }
 
 echo "OK";
