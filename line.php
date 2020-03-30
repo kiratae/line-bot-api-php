@@ -43,7 +43,7 @@ if( $event['message']['type'] == 'text' )
 		$covidData = json_decode($data)->response[0];
 		$datetime = new DateTime($covidData->time);
 $reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
-🤧 ติดเชื้อเพิ่ม  '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
+🤧 ติดเชื้อเพิ่ม '.number_format(str_replace('+', '', $covidData->cases->new)).' ราย
 😷 ติดเชื้อสะสม '.number_format($covidData->cases->total).' ราย'.($covidData->deaths->new === NULL ? '' : '
 👻 เสียชีวิต '.number_format($covidData->deaths->new).' ราย').'
 💀 ยอดรวมผู้เสียชีวิต '.number_format($covidData->deaths->total).' ราย
