@@ -40,7 +40,7 @@ if ( sizeof($request_array['events']) > 0 ) {
                 $datetime = new DateTime($covidData->time);
                 date_timezone_set($datetime, timezone_open('Asia/Bangkok'));
                 $reply_message = '"รายงานสถานการณ์ ยอดผู้ติดเชื้อไวรัสโคโรนา 2019 (COVID-19) ในประเทศไทย"
-🤧 ติดเชื้อเพิ่ม '.($covidData->cases->new ? number_format(str_replace('+', '', $covidData->cases->new)) + ' ราย' : 'ไม่พบ!').'
+🤧 ติดเชื้อเพิ่ม '.($covidData->cases->new ? number_format(str_replace('+', '', $covidData->cases->new)). ' ราย' : 'ไม่พบ!').'
 😷 ติดเชื้อสะสม '.number_format($covidData->cases->total).' ราย'.($covidData->deaths->new === NULL ? '' : '
 👻 เสียชีวิต '.number_format($covidData->deaths->new).' ราย').'
 💀 ยอดรวมผู้เสียชีวิต '.number_format($covidData->deaths->total).' ราย
